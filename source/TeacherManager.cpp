@@ -5,6 +5,19 @@ TeacherManager::TeacherManager(QWidget *parent)
 	ui(new Ui::TeacherManager)
 {
 	ui->setupUi(this);
+	
+	// 连接退出系统按钮信号与槽
+	connect(ui->exitbtn, SIGNAL(clicked()), this, SLOT(exitbtnSlot()));
+
+	// 创建教师成绩查询窗口
+	teachersearch = new TeacherSearch(this);
+	ui->teacherstack->addWidget(teachersearch);
+	connect(this, SIGNAL(toTeacherSearch()), teachersearch, SLOT(comeTeacherManage()));
+	connect(ui->searchbtn, SIGNAL(clicked()), this, SLOT(searchbtnSlot()));
+	
+	//实现多个功能窗口与教师管理窗口信号槽连接，用于设置button属性
+	connect(teachersearch, SIGNAL(EmitToTeacherManage()), this, SLOT(setbtnEnableSlot()));
+	connect(teachersearch,SIGNAL(EmitToTeacherManageToChangeStack()),this,SLOT(tosetStack()));
 }
 
 TeacherManager::~TeacherManager()
@@ -48,3 +61,20 @@ void TeacherManager::exitbtnSlot()
 		delete this;
 	}
 }
+
+void TeacherManager::comeLoginDialog(QString name, QString num)
+{
+	teachername=name;
+	teachernum=num;
+	ui->teachernameline->setText(teachername);
+}
+
+void TeacherManager::setbtnEnableSlot()
+{
+	this->setbtntrue();
+}
+
+ void TeacherManager::tosetStack()
+ {
+
+ }

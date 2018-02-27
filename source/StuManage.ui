@@ -1,81 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TeacherManager</class>
- <widget class="QWidget" name="TeacherManager">
+ <class>StuManage</class>
+ <widget class="QWidget" name="StuManage">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
-    <height>493</height>
+    <width>587</width>
+    <height>396</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TeacherManager</string>
+   <string>StuManage</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+  <layout class="QHBoxLayout" name="horizontalLayout_6">
+   <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QToolBox" name="teacherTool">
+        <widget class="QToolBox" name="studentTool">
          <property name="currentIndex">
           <number>1</number>
          </property>
-         <widget class="QWidget" name="page">
+         <widget class="QWidget" name="page_3">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>273</width>
-            <height>390</height>
+            <width>280</width>
+            <height>293</height>
            </rect>
           </property>
           <attribute name="label">
-           <string>成绩管理</string>
+           <string>Page 1</string>
           </attribute>
           <layout class="QFormLayout" name="formLayout_2">
            <item row="0" column="0">
-            <widget class="QSplitter" name="splitter_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QPushButton" name="scorebtn">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>0</height>
+              </size>
              </property>
-             <widget class="QPushButton" name="searchbtn">
-              <property name="text">
-               <string>查询学生成绩</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="changebtn">
-              <property name="text">
-               <string>修改学生成绩</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="insertbtn">
-              <property name="text">
-               <string>添加学生成绩</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="deletebtn">
-              <property name="text">
-               <string>删除学生成绩</string>
-              </property>
-             </widget>
+             <property name="text">
+              <string>成绩查询</string>
+             </property>
             </widget>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="page_2">
+         <widget class="QWidget" name="page_4">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>273</width>
-            <height>390</height>
+            <width>280</width>
+            <height>293</height>
            </rect>
           </property>
           <attribute name="label">
-           <string>个人中心</string>
+           <string>Page 2</string>
           </attribute>
           <layout class="QFormLayout" name="formLayout">
            <item row="0" column="0">
@@ -83,17 +69,57 @@
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
+             <widget class="QPushButton" name="returnbtn">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>注销账号</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="infobtn">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>填写个人信息</string>
+              </property>
+             </widget>
              <widget class="QPushButton" name="passwordbtn">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="text">
                <string>修改密码</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="returnbtn">
+             <widget class="QPushButton" name="searchbtn">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="text">
-               <string>注销用户</string>
+               <string>查询个人信息</string>
               </property>
              </widget>
              <widget class="QPushButton" name="exitbtn">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="text">
                <string>退出系统</string>
               </property>
@@ -105,26 +131,38 @@
         </widget>
        </item>
        <item>
-        <widget class="QStackedWidget" name="teacherstack"/>
+        <widget class="QStackedWidget" name="sudentstack">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="page_5"/>
+         <widget class="QWidget" name="page_6"/>
+        </widget>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="label_2">
            <property name="styleSheet">
             <string notr="true">font: 75 14pt &quot;DFKai-SB&quot;;</string>
            </property>
            <property name="text">
-            <string>管理者：</string>
+            <string>学生用户：</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="teachernameline">
+          <widget class="QLabel" name="studentnameline">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">color:white;
 font: 75 14pt &quot;DFKai-SB&quot;;</string>
@@ -143,26 +181,32 @@ font: 75 14pt &quot;DFKai-SB&quot;;</string>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>20</width>
            <height>20</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="label_4">
            <property name="styleSheet">
             <string notr="true">font: 75 14pt &quot;DFKai-SB&quot;;</string>
            </property>
            <property name="text">
-            <string>系统时间：</string>
+            <string>系统时间:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="timeline">
+          <widget class="QLabel" name="timeline_2">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">color:white;
 font: 75 14pt &quot;DFKai-SB&quot;;</string>

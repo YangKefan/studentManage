@@ -1,9 +1,18 @@
 #include "TeacherSearch.h"
 
 TeacherSearch::TeacherSearch(QWidget *parent)
-	: QWidget(parent)
+	: QWidget(parent),
+	ui(new Ui::TeacherSearch)
 {
 	ui->setupUi(this);
+
+	// 连接返回按钮信号与槽
+	connect(ui->returnBtn,SIGNAL(clicked()),this,SLOT(returnbtnSlot()));
+	connect(ui->searchBtn,SIGNAL(clicked()),this,SLOT(searchbtnSlot()));
+
+	//设置view不可编辑
+	ui->teacherSearchView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	ui->teacherSearchView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
 	// 创建model_1实现与数据库的交互
 	model_1 = new QSqlTableModel(this);
@@ -33,7 +42,7 @@ TeacherSearch::TeacherSearch(QWidget *parent)
 	radioBtnGroup->addButton(ui->nameRadio,1);
 
 	connect(radioBtnGroup, SIGNAL(clicked()), this, SLOT(radioBtnGroupSlot()) );
-	connect(ui->inputLine, SIGNAL(textChanged()), this, SLOT(inputEditSlot()));
+	connect(ui->inputLine, SIGNAL(textChanged(QString)), this, SLOT(inputEditSlot(QString)));
 
 }
 
