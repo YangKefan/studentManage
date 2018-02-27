@@ -20,14 +20,26 @@ public:
 	void setbtnfalse();
 
 private:
-	Ui::TeacherManager *ui;
+	Ui::TeacherManager *ui;	
+	QString teachername;
+	QString teachernum;
+	QTimer *timelinetimer;
 	TeacherSearch *teachersearch;
-private slots:
-	 void searchbtnSlot();
-	 void exitbtnSlot();
 
 signals:
-	 void toTeacherSearch();
+	void toLoginDialog();
+	void toTeaPassWord(QString);
+	void toTeacherSearch();
+	void toTeacherChangeScore();
+	void toTeacherDelete();
+
+private slots:
+	void comeLoginDialog(QString,QString);
+	void searchbtnSlot();
+	void exitbtnSlot();
+	void setbtnEnableSlot();
+	void tosetStack();
+
 };
 
 #endif // TEACHERMANAGER_H

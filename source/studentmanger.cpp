@@ -133,10 +133,12 @@ void StudentManger::on_loginButton_clicked()
 	{
 		model->setTable("teacher");
 		model->select();
-		int i;
+		int i;		
 		for(i=0;i<model->rowCount();i++)
 		{
 			QSqlRecord record=model->record(i);
+			qDebug()<<record.value(0)<<record.value(6);
+
 			if(record.value(0)==ui->userLine->text()&&
 				record.value(2)==ui->passwordLine->text())
 			{
@@ -145,11 +147,12 @@ void StudentManger::on_loginButton_clicked()
 				QString str3=GBK::a2w("教师");
 				QMessageBox::information(this,GBK::a2w("提示"),str3+str2+str1,QMessageBox::Yes);
 				//创建教师成绩管理窗口
-				teacher=new TeacherManager(this);
+				teacher=new TeacherManager;
 				teacher->show();
-				connect(this,SIGNAL(toTeacherManage(QString,QString)),teacher,SLOT(comeLoginDialog(QString,QString)));
-				//connect(teacher,SIGNAL(toLoginDialog()),this,SLOT(showNormal()));
 				emit toTeacherManage(str2,record.value(0).toString());
+				connect(this,SIGNAL(toTeacherManage(QString,QString)),teacher,SLOT(comeLoginDialog(QString,QString)));
+				connect(teacher,SIGNAL(toLoginDialog()),this,SLOT(showNormal()));
+				
 				this->clearAll();
 				this->hide();
 				return;

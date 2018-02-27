@@ -3,6 +3,7 @@
 
 #include "ui_studentmanger.h"
 #include "TeacherManager.h"
+#include "StuManage.h"
 
 #include <QtWidgets/QMainWindow>
 #include <QDialog>
@@ -27,6 +28,7 @@ private:
 	QButtonGroup *radiogroup;
 	QSqlTableModel *model;
 	TeacherManager *teacher;
+	StuManage *student;
 
 private slots:
 	void on_loginButton_clicked(); // µÇÂ¼²Û
