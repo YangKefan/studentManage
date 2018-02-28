@@ -6,9 +6,7 @@ TeacherSearch::TeacherSearch(QWidget *parent)
 {
 	ui->setupUi(this);
 
-	// 连接返回按钮信号与槽
-	connect(ui->returnBtn,SIGNAL(clicked()),this,SLOT(returnbtnSlot()));
-	connect(ui->searchBtn,SIGNAL(clicked()),this,SLOT(searchbtnSlot()));
+
 
 	//设置view不可编辑
 	ui->teacherSearchView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -18,11 +16,11 @@ TeacherSearch::TeacherSearch(QWidget *parent)
 	model_1 = new QSqlTableModel(this);
 	model_1->setTable("student");
 	model_1->setEditStrategy(QSqlTableModel::OnManualSubmit); //设置保存策略为手动提交
-	model_1->setHeaderData(0, Qt::Horizontal, "学号");
-	model_1->setHeaderData(1,Qt::Horizontal,"姓名");
-	model_1->setHeaderData(2, Qt::Horizontal,"语文成绩");
-	model_1->setHeaderData(3, Qt::Horizontal,"数学成绩");
-	model_1->setHeaderData(4, Qt::Horizontal,"英语成绩");
+	model_1->setHeaderData(0, Qt::Horizontal, GBK::a2w("学号"));
+	model_1->setHeaderData(1,Qt::Horizontal,GBK::a2w("姓名"));
+	model_1->setHeaderData(2, Qt::Horizontal,GBK::a2w("语文成绩"));
+	model_1->setHeaderData(3, Qt::Horizontal,GBK::a2w("数学成绩"));
+	model_1->setHeaderData(4, Qt::Horizontal,GBK::a2w("英语成绩"));
 	model_1->removeColumns(5,5);
 	
 	// 创建model_2实现查询功能
@@ -41,9 +39,12 @@ TeacherSearch::TeacherSearch(QWidget *parent)
 	radioBtnGroup->addButton(ui->numRadio, 0);
 	radioBtnGroup->addButton(ui->nameRadio,1);
 
-	connect(radioBtnGroup, SIGNAL(clicked()), this, SLOT(radioBtnGroupSlot()) );
+	connect(radioBtnGroup, SIGNAL(clicked()), this, SLOT(radioBtnGroupSlot(int)) );
 	connect(ui->inputLine, SIGNAL(textChanged(QString)), this, SLOT(inputEditSlot(QString)));
 
+	// 连接返回按钮信号与槽
+	connect(ui->returnBtn,SIGNAL(clicked()),this,SLOT(returnbtnSlot()));
+	connect(ui->searchBtn,SIGNAL(clicked()),this,SLOT(searchbtnSlot()));
 }
 
 TeacherSearch::~TeacherSearch()
@@ -140,7 +141,7 @@ void TeacherSearch::inputEditSlot(QString)
 	return;
 }
 
-void TeacherSearch::radioBtnGroupSlot()
+void TeacherSearch::radioBtnGroupSlot(int)
 {
 	ui->teacherSearchView->setModel(model_1);
 	ui->inputLine->clear();

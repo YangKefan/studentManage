@@ -3,6 +3,8 @@
 
 #include "ui_TeacherManager.h"
 #include"TeacherSearch.h"
+#include"TeacherInsert.h"
+#include "TeacherChangeScore.h"
 
 #include <QWidget>
 #include <QDebug>
@@ -25,6 +27,8 @@ private:
 	QString teachernum;
 	QTimer *timelinetimer;
 	TeacherSearch *teachersearch;
+	TeacherChangeScore *teacherchangescore;
+	TeacherInsert *teacherinsert;
 
 signals:
 	void toLoginDialog();
@@ -39,6 +43,9 @@ private slots:
 	void exitbtnSlot();
 	void setbtnEnableSlot();
 	void tosetStack();
+	void LogoutBtnSlot();
+	void insertbtnSlot();
+	 void changebtnSLot();
 
 };
 

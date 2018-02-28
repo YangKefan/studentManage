@@ -30,7 +30,8 @@ private slots:
 	void comeTeacherManage();
 	void returnBtnSlot();
 	void inputEditSlot(QString);
-	void radioBtnGroupSlot();
+	void radioBtnGroupSlot(int);
+	
 signals:
 	void EmitToTeacherManage();
 	void EmitToTeacherManageToChangeStack();		
