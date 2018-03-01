@@ -28,10 +28,10 @@ TeacherManager::TeacherManager(QWidget *parent)
 	connect(ui->insertbtn, SIGNAL(clicked()), this, SLOT(insertbtnSlot()));
 	
 	//实现多个功能窗口与教师管理窗口信号槽连接，用于设置button属性
-	connect(teachersearch, SIGNAL(EmitToTeacherManage()), this, SLOT(setbtnEnableSlot()));
-	connect(teacherchangescore,SIGNAL(EmitToTeacherManage()),this,SLOT(setbtnEnableSlot()));
-	connect(teacherinsert, SIGNAL(EmitToTeacherManage()), this, SLOT(setbtnEnableSlot()));
-	connect(teachersearch,SIGNAL(EmitToTeacherManageToChangeStack()),this,SLOT(tosetStack()));
+	//connect(teachersearch, SIGNAL(EmitToTeacherManage()), this, SLOT(setbtnEnableSlot()));
+	//connect(teacherchangescore,SIGNAL(EmitToTeacherManage()),this,SLOT(setbtnEnableSlot()));
+	//connect(teacherinsert, SIGNAL(EmitToTeacherManage()), this, SLOT(setbtnEnableSlot()));
+	//connect(teachersearch,SIGNAL(EmitToTeacherManageToChangeStack()),this,SLOT(tosetStack()));
 	
 }
 
@@ -94,7 +94,7 @@ void TeacherManager::setbtnEnableSlot()
 
 void TeacherManager::searchbtnSlot()
 {
-	this->setbtnfalse();
+	//this->setbtnfalse();
 	teachersearch->show();	
 	ui->teacherstack->setCurrentIndex(0);
 	emit toTeacherSearch();
@@ -102,7 +102,7 @@ void TeacherManager::searchbtnSlot()
 
  void TeacherManager::changebtnSLot()
  {
-	 this->setbtnfalse();
+	 //this->setbtnfalse();
 	 teacherchangescore->show();
 	 ui->teacherstack->setCurrentIndex(1);
 	 emit toTeacherChangeScore();
@@ -110,7 +110,7 @@ void TeacherManager::searchbtnSlot()
 
  void TeacherManager::insertbtnSlot()
  {
-	 this->setbtnfalse();
+	 //this->setbtnfalse();
 	 teacherinsert->show();
 	 ui->teacherstack->setCurrentIndex(2);
  }

@@ -9,6 +9,7 @@
 #include <QButtonGroup>
 #include <QMessageBox>
 #include <QStringList>
+#include <QTableWidgetItem>
 #include <QDebug>
 
 

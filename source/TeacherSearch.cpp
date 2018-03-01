@@ -6,36 +6,29 @@ TeacherSearch::TeacherSearch(QWidget *parent)
 {
 	ui->setupUi(this);
 
-
-
-	//设置view不可编辑
-	ui->teacherSearchView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-	ui->teacherSearchView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-
 	// 创建model_1实现与数据库的交互
 	model_1 = new QSqlTableModel(this);
-	model_1->setTable("student");
+	model_1->setTable("student");	
 	model_1->setEditStrategy(QSqlTableModel::OnManualSubmit); //设置保存策略为手动提交
 	model_1->setHeaderData(0, Qt::Horizontal, GBK::a2w("学号"));
 	model_1->setHeaderData(1,Qt::Horizontal,GBK::a2w("姓名"));
 	model_1->setHeaderData(2, Qt::Horizontal,GBK::a2w("语文成绩"));
 	model_1->setHeaderData(3, Qt::Horizontal,GBK::a2w("数学成绩"));
 	model_1->setHeaderData(4, Qt::Horizontal,GBK::a2w("英语成绩"));
-	model_1->removeColumns(5,5);
+		
 	
 	// 创建model_2实现查询功能
 	model_2 = new QSqlTableModel(this);
 	model_2->setTable("student");
 	model_2->setEditStrategy(QSqlTableModel::OnManualSubmit);
-	model_2->setHeaderData(0, Qt::Horizontal, "学号");
-	model_2->setHeaderData(1,Qt::Horizontal,"姓名");
-	model_2->setHeaderData(2, Qt::Horizontal,"语文成绩");
-	model_2->setHeaderData(3, Qt::Horizontal,"数学成绩");
-	model_2->setHeaderData(4, Qt::Horizontal,"英语成绩");
-	model_2->removeColumns(5,5);
+	model_2->setHeaderData(0, Qt::Horizontal, GBK::a2w("学号"));
+	model_2->setHeaderData(1,Qt::Horizontal,GBK::a2w("姓名"));
+	model_2->setHeaderData(2, Qt::Horizontal,GBK::a2w("语文成绩"));
+	model_2->setHeaderData(3, Qt::Horizontal,GBK::a2w("数学成绩"));
+	model_2->setHeaderData(4, Qt::Horizontal,GBK::a2w("英语成绩"));
 
 	// 创建radiobuttongroup
-	radioBtnGroup = new QButtonGroup(this);
+	radioBtnGroup = new QButtonGroup();
 	radioBtnGroup->addButton(ui->numRadio, 0);
 	radioBtnGroup->addButton(ui->nameRadio,1);
 
@@ -107,6 +100,7 @@ void TeacherSearch::searchBtnSlot()
 void TeacherSearch::comeTeacherManage()
 {
 	model_1->select();
+	qDebug()<<model_1->data(model_1->index(0,0));
 	if (model_1->data(model_1->index(0,0)).toString().isEmpty())
 	{
 		QMessageBox::warning(this,GBK::a2w("提示"), GBK::a2w("学生信息为空，请增加学生信息！"),QMessageBox::Yes);
@@ -114,7 +108,33 @@ void TeacherSearch::comeTeacherManage()
 		this->hide();
 		return;
 	}
+
+	// 利用setModel()方法将数据模型与QTableView绑定
 	ui->teacherSearchView->setModel(model_1);
+
+	// 设置选中时为整行选中 
+	ui->teacherSearchView->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+	// 设置选中单个目标
+	ui->teacherSearchView->setSelectionMode(QAbstractItemView::SingleSelection);
+
+	// 设置每列宽度适中
+	ui->teacherSearchView->resizeColumnsToContents();
+
+	// 设置表头均分填充容器
+	ui->teacherSearchView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+	// 隐藏不显示的列
+	ui->teacherSearchView->setColumnHidden(5,true);
+	ui->teacherSearchView->setColumnHidden(6,true);
+	ui->teacherSearchView->setColumnHidden(7,true);
+	ui->teacherSearchView->setColumnHidden(8,true);
+
+	//表头qss设置
+	QString strHeaderQss;
+	strHeaderQss = "QHeaderView::section { background:green; color:white;min-height:3em;}";
+	ui->teacherSearchView->setStyleSheet(strHeaderQss);
+	
 	return;
 
 }//end of comeTeacherManage
@@ -128,22 +148,20 @@ void TeacherSearch::returnBtnSlot()
 	return;
 }
 
-
 void TeacherSearch::inputEditSlot(QString)
 {
 	if (ui->inputLine->text().isEmpty())
 	{
-		ui->teacherSearchView->setModel(model_1);
-		
+		QMessageBox::warning(this, GBK::a2w("警告"), GBK::a2w("查询输入框不能为空！") );
+		ui->teacherSearchView->setModel(model_1);		
 		return;
 	}
-
 	return;
 }
 
 void TeacherSearch::radioBtnGroupSlot(int)
 {
-	ui->teacherSearchView->setModel(model_1);
+	ui->teacherSearchView->setModel(model_2);
 	ui->inputLine->clear();
 
 	return;
